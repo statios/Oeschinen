@@ -21,9 +21,7 @@ struct SideRectangle: Rectangle {
         ),
         childrenTitle: TextStyle(
             font: .systemFont(ofSize: 11, weight: .medium),
-            minimumLineHeight: 22,
-            alignment: .center,
-            baselineOffset: 2
+            alignment: .center
         ),
         childrenDescription: TextStyle(
             font: .systemFont(ofSize: 11, weight: .regular),
@@ -43,9 +41,9 @@ struct SideRectangle: Rectangle {
             + subtitleAttStr.height(in: container.width)
             + descriptionAttStr.height(in: container.width)
             + childrenTitleAttStr.height(in: container.width)
+            + (CGFloat(content.children.compactMap { $0.description }.count) * spacingBetweenChildren)
             + childrenDescriptionAttStr.height(in: container.width)
             + Constant.pagePadding
-            + Constant.separatorWidth
         )
     }
     
@@ -67,8 +65,13 @@ struct SideRectangle: Rectangle {
         }
         
         zip(childrenTitleAttStr, childrenDescriptionAttStr).forEach { title, description in
+            
             title.draw(in: effectiveContainer)
             effectiveContainer.origin.y += title.height(in: container.width)
+            
+            if let description {
+                effectiveContainer.origin.y += spacingBetweenChildren
+            }
             
             description?.draw(in: effectiveContainer)
             effectiveContainer.origin.y += description.height(in: container.width)
@@ -88,11 +91,11 @@ struct SideRectangle: Rectangle {
 extension SideRectangle {
     
     private var titleBottomPadding: CGFloat {
-        return 16
+        return 24
     }
     
-    private var childrenSpacing: CGFloat {
-        return 8
+    private var spacingBetweenChildren: CGFloat {
+        return 4
     }
 }
 

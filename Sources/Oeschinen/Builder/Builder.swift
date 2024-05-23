@@ -29,7 +29,7 @@ struct Constant {
     
     static let separatorWidth: CGFloat = 1
     
-    static let sectionSpacing = CGFloat(48)
+    static let sectionSpacing = CGFloat(40)
     
     static let sideSpacing = CGFloat(40)
 }

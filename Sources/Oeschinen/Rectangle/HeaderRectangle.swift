@@ -94,7 +94,7 @@ extension HeaderRectangle {
     }
     
     private var childrenIndent: CGFloat {
-        return 104
+        return 96
     }
     
     private var childrenTitleWidth: CGFloat {
